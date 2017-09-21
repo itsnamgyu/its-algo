@@ -6,6 +6,7 @@ Practice for my first attempt at the ACM-ICPC competition!
 ### Divide and Conquer
 - [ ] Code Mergesort
 - [ ] Code Quicksort
+- [ ] Sovle DaC questions from BOJ
 
 ### Dynamic Programming
 - [ ] Skim Chapter 3 of 'Fundamentals of Algorithms'
