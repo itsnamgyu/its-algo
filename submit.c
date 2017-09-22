@@ -7,5 +7,5 @@ void submit(int (*f) (void), char *questionString) {
 	int success = f();
 	
 	printf(success ? "[Success] %s\n" :"[Failure] %s\n", questionString);
-	printf("Time taken: %.2f seconds\n", (float) (clock() - start) / CLOCKS_PER_SEC);
+	printf("Elapsed time: %.2f seconds\n", (float) (clock() - start) / CLOCKS_PER_SEC);
 }
