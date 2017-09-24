@@ -1,8 +1,9 @@
 # its-acm
 (Originally) Practice for my first attempt at the ACM-ICPC competition!
+
 (As of the day after the competition) This is how I study algorithms!
 
-Much of the early work done on this repo will be based on Sogang University course, "Design and Analysis of Algorithms" (CSE3081), and "Foundations of Algorithms 5th Edition" by Richard E. Neapolitan.
+Much of the early work done on this repo will be based on Sogang University course, "Design and Analysis of Algorithms" (CSE3081) by professor Insung Ihm, and "Foundations of Algorithms 5th Edition" by Richard E. Neapolitan.
 
 # Topic/Todo List
 
