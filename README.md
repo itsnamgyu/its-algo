@@ -10,14 +10,16 @@ Much of the early work done on this repo will be based on Sogang University cour
 ### Divide and Conquer
 - [x] Code Mergesort
 - [ ] Code Quicksort
-- [ ] Sovle DaC questions from BOJ
+- [ ] Read chapter 2 and internalize the DaC methodology!
+- [ ] Solve DaC questions from BOJ for practice
 
 ### Dynamic Programming
-- [ ] Skim Chapter 3 of 'Fundamentals of Algorithms'
+- [ ] Skim chapter 3 of 'Fundamentals of Algorithms'
 - [x] Code a Fibbonacci calculator (w/o reference)
 - [x] Code the Floyd–Warshall Algorithm
 - [x] Code the Bellman-Ford Algorithm
-- [ ] Solve DP questions from BOJ
+- [ ] Read chapter 3 and internalize the DP methodology!
+- [ ] Solve DP questions from BOJ for practice
 
 ### Greedy Algorithms
 - [ ] Code the Prim Algorithm & the Kruskal Algorithm
