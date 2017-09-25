@@ -1,5 +1,9 @@
 # its-acm
-Practice for my first attempt at the ACM-ICPC competition!
+(Originally) Practice for my first attempt at the ACM-ICPC competition!
+
+(As of the day after the competition) This is how I study algorithms!
+
+Much of the early work done on this repo will be based on Sogang University course, "Design and Analysis of Algorithms" (CSE3081) by professor Insung Ihm, and "Foundations of Algorithms 5th Edition" by Richard E. Neapolitan.
 
 # Topic/Todo List
 
@@ -12,7 +16,7 @@ Practice for my first attempt at the ACM-ICPC competition!
 - [ ] Skim Chapter 3 of 'Fundamentals of Algorithms'
 - [x] Code a Fibbonacci calculator (w/o reference)
 - [x] Code the Floyd–Warshall Algorithm
-- [ ] Code the Bellman-Ford Algorithm
+- [x] Code the Bellman-Ford Algorithm
 - [ ] Solve DP questions from BOJ
 
 ### Greedy Algorithms
