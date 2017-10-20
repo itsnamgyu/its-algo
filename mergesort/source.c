@@ -2,7 +2,7 @@
 #include "../submit.h"
 #include <math.h>
 
-#define SIZE 10000000
+#define SIZE 30
 
 int list[SIZE]; 
 int buffer[SIZE];
@@ -20,32 +20,62 @@ int main(void) {
 }
 
 void mergesort(int low, int high) {
-	// base case?
-	if (low == high) {
-		return;
+	if (low < high) {
+		// divide and mergesort components
+		int mid = (low + high) / 2;
+
+		mergesort(low, mid);
+		mergesort(mid + 1, high);
+		
+		//////
+		printf("L1: ");
+		for (int i = low; i <= mid; i ++) {
+			printf("%d:%d ", i, list[i]);
+		}
+		printf("\n");
+
+		printf("L2: ");
+		for (int i = mid + 1; i <= high; i ++) {
+			printf("%d:%d ", i, list[i]);
+		}
+		printf("\n");
+		//////
+	
+		// merge sorted components
+		merge(low, mid, high);
+
+		//////
+		printf("L3: ");
+		for (int i = low; i <= high; i ++) {
+			printf("%d ", list[i]);
+		}
+		printf("\n");
+		//////
 	}
-
-	// divide and mergesort components
-	int mid = (low + high) / 2;
-
-	mergesort(low, mid);
-	mergesort(mid + 1, high);
-
-	// merge sorted components
-	merge(low, mid, high);
 }
 
 void merge(int low, int mid, int high) {
 	int a = low, b = mid + 1;
 	int i, j;
-	
-	for (i = 0; a <= mid && b <= high; i ++) {
-		if (a == mid + 1 || list[a] > list[b]) {
+
+	printf("L0: ");
+	for (i = 0; a <= mid || b <= high; i ++) {
+		printf("a: %d, mid: %d, b: %d, high %d\n", a, mid, b, high);
+		printf("Comparing %d and %d\n", list[a], list[b]);
+
+		if (a == mid + 1) {
+			buffer[i] = list[b ++];
+		} else if (b == high + 1) {
+			buffer[i] = list[a ++];
+		} else if (list[a] > list[b]) {
 			buffer[i] = list[b ++];
 		} else {
 			buffer[i] = list[a ++];
 		}
+
+		printf("%d  ", buffer[i]);
 	}
+	printf("\n");
 
 	i = 0; j = low;
 	while (j <= high) {
@@ -61,7 +91,7 @@ int solver() {
 		list[i] = rand();
 	}
 
-	mergesort(0, SIZE);
+	mergesort(0, SIZE - 1);
 
 	for (int i = 0; i < SIZE - 1; i ++) {
 		if (list[i] > list[i + 1]) {
