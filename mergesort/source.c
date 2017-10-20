@@ -1,68 +1,71 @@
-#include <stdio.h>
 #include "../submit.h"
+#include "../lib.h"
+#include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
-#define SIZE 30
+#define COUNT 12
 
-int list[SIZE]; 
-int buffer[SIZE];
+typedef struct _List{
+	int *array;
+	int size;
+} List;
 
-void mergesort(int low, int high);
 
-void merge(int low, int mid, int high);
+int buffer[10000000];
 
-int solver();
+
+void my_mergesort(int *list, int low, int high);
+
+void merge(int *list, int low, int mid, int high);
+
+void *algo(void *data);
+
+int check(void *result);
 
 int main(void) {
-	submit(solver, "mergesort [N = 10^7]");
+	List **test_cases;
+	char test_titles[COUNT][50];
+
+	test_cases = (List**) malloc(sizeof(List*) * COUNT);
+	int size = 1;
+	for (int i = 0; i < COUNT; i ++) {
+		sprintf(test_titles[i], "Size = %d", size);
+		test_cases[i] = (List*) malloc(sizeof(List));
+		test_cases[i]->array = (int*) malloc(sizeof(int) * size);
+		test_cases[i]->size = size;
+		randomize_array(test_cases[i]->array, size);
+		
+		size *= 4;
+	}
+	
+	submit_cases("Merge Sort", test_cases, test_titles, COUNT, algo, check);
+
+	for (int i = 0; i < COUNT; ++ i) {
+		free(test_cases[i]);
+	}
+	free(test_cases);
 
 	return 0;
 }
 
-void mergesort(int low, int high) {
+void my_mergesort(int *list, int low, int high) {
 	if (low < high) {
-		// divide and mergesort components
+		// divide and my_mergesort components
 		int mid = (low + high) / 2;
 
-		mergesort(low, mid);
-		mergesort(mid + 1, high);
+		my_mergesort(list, low, mid);
+		my_mergesort(list, mid + 1, high);
 		
-		//////
-		printf("L1: ");
-		for (int i = low; i <= mid; i ++) {
-			printf("%d:%d ", i, list[i]);
-		}
-		printf("\n");
-
-		printf("L2: ");
-		for (int i = mid + 1; i <= high; i ++) {
-			printf("%d:%d ", i, list[i]);
-		}
-		printf("\n");
-		//////
-	
-		// merge sorted components
-		merge(low, mid, high);
-
-		//////
-		printf("L3: ");
-		for (int i = low; i <= high; i ++) {
-			printf("%d ", list[i]);
-		}
-		printf("\n");
-		//////
+		merge(list, low, mid, high);
 	}
 }
 
-void merge(int low, int mid, int high) {
+void merge(int *list, int low, int mid, int high) {
 	int a = low, b = mid + 1;
 	int i, j;
 
-	printf("L0: ");
 	for (i = 0; a <= mid || b <= high; i ++) {
-		printf("a: %d, mid: %d, b: %d, high %d\n", a, mid, b, high);
-		printf("Comparing %d and %d\n", list[a], list[b]);
-
 		if (a == mid + 1) {
 			buffer[i] = list[b ++];
 		} else if (b == high + 1) {
@@ -72,10 +75,7 @@ void merge(int low, int mid, int high) {
 		} else {
 			buffer[i] = list[a ++];
 		}
-
-		printf("%d  ", buffer[i]);
 	}
-	printf("\n");
 
 	i = 0; j = low;
 	while (j <= high) {
@@ -84,20 +84,14 @@ void merge(int low, int mid, int high) {
 	}
 }
 
-int solver() {
-	srand(time(NULL));
-
-	for (int i = 0; i < SIZE; i ++) {
-		list[i] = rand();
-	}
-
-	mergesort(0, SIZE - 1);
-
-	for (int i = 0; i < SIZE - 1; i ++) {
-		if (list[i] > list[i + 1]) {
-			return 0;
-		}
-	}
+void *algo(void *data) {
+	List* list = data;
+	my_mergesort(list->array, 0, list->size - 1);
 	
-	return 1;
+	return list;
+}
+
+int check(void *result) {
+	List *list = result;
+	return is_sorted(list->array, list->size);
 }

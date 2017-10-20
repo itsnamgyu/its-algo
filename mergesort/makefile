@@ -1,13 +1,14 @@
-test : source.o submit.o
-	gcc -o test source.o submit.o
-	@echo "Submitting source..."
+test : source.o submit.o lib.o
+	gcc -o test source.o submit.o lib.o
 	@./test
-	@echo "Submit complete."
 	@rm test
 	@rm *.o
 
-source.o : source.c ../submit.h
+source.o : source.c
 	gcc -c source.c
 
-submit.o : ../submit.c ../submit.h
+submit.o : ../submit.c
 	gcc -c ../submit.c
+
+lib.o : ../lib.c
+	gcc -c ../lib.c

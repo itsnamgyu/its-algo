@@ -1,7 +1,7 @@
 #include "sort-util.h"
 #include <stdlib.h>
 
-void fill_array_random(int *array, int size) {
+void randomize_array(int *array, int size) {
 	for (int i = 0; i < size; i ++) {
 		array[i] = rand();
 	}
