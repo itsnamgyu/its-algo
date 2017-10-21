@@ -11,7 +11,6 @@ typedef struct _List{
 	int size;
 } List;
 
-
 int buffer[10000000];
 
 
@@ -39,7 +38,7 @@ int main(void) {
 		size *= 4;
 	}
 	
-	submit_cases("Merge Sort", test_cases, test_titles, COUNT, algo, check);
+	submit_cases("Merge Sort", (void**) test_cases, test_titles, COUNT, algo, check);
 
 	for (int i = 0; i < COUNT; ++ i) {
 		free(test_cases[i]);

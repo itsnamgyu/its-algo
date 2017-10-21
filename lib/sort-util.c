@@ -7,7 +7,7 @@ void randomize_array(int *array, int size) {
 	}
 }
 
-int is_sorted(int * const array, int size) {
+int is_sorted(int const * array, int size) {
 	if (size < 2) {
 		return 1;
 	}
