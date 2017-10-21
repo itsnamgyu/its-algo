@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #define MIN_REPEAT_COUNT 20
+#define MAX_REPEAT_TIME 500
 	
 void submit(int (*f) (void), char *questionString) {
 	clock_t start = clock();
@@ -64,7 +65,7 @@ void submit_cases_repeatedly(
 		int repeat;
 		int success;
 
-		for (repeat = 0; (float) (clock() - first_clock) / CLOCKS_PER_SEC < 0.1 || repeat < MIN_REPEAT_COUNT; ++ repeat) {
+		for (repeat = 0; (float) (clock() - first_clock) / CLOCKS_PER_SEC * 1000 < MAX_REPEAT_TIME || repeat < MIN_REPEAT_COUNT; ++ repeat) {
 			void *test_case = load_test_case(i);
 			
 			clock_t old_clock = clock();
