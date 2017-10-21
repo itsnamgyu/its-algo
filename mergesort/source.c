@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #define COUNT 12
+#define BASE 4
 
 typedef struct _List{
 	int *array;
@@ -13,48 +14,36 @@ typedef struct _List{
 
 int buffer[10000000];
 
-
-void my_mergesort(int *list, int low, int high);
+void merge_sort(int *list, int low, int high);
 
 void merge(int *list, int low, int mid, int high);
 
 void *algo(void *data);
 
-int check(void *result);
+void load_title(int index, char title[50]);
+
+void *load_test_case(int index);
+
+int check(void *result, int index);
+
+void *free_all(void *test_case, void *result);
 
 int main(void) {
 	List **test_cases;
 	char test_titles[COUNT][50];
-
-	test_cases = (List**) malloc(sizeof(List*) * COUNT);
-	int size = 1;
-	for (int i = 0; i < COUNT; i ++) {
-		sprintf(test_titles[i], "Size = %d", size);
-		test_cases[i] = (List*) malloc(sizeof(List));
-		test_cases[i]->array = (int*) malloc(sizeof(int) * size);
-		test_cases[i]->size = size;
-		randomize_array(test_cases[i]->array, size);
-		
-		size *= 4;
-	}
 	
-	submit_cases("Merge Sort", (void**) test_cases, test_titles, COUNT, algo, check);
-
-	for (int i = 0; i < COUNT; ++ i) {
-		free(test_cases[i]);
-	}
-	free(test_cases);
+	submit_cases_repeatedly("Merge Sort", load_test_case, load_title, COUNT, algo, check, free_all);
 
 	return 0;
 }
 
-void my_mergesort(int *list, int low, int high) {
+void merge_sort(int *list, int low, int high) {
 	if (low < high) {
-		// divide and my_mergesort components
+		// divide and merge_sort components
 		int mid = (low + high) / 2;
 
-		my_mergesort(list, low, mid);
-		my_mergesort(list, mid + 1, high);
+		merge_sort(list, low, mid);
+		merge_sort(list, mid + 1, high);
 		
 		merge(list, low, mid, high);
 	}
@@ -85,12 +74,35 @@ void merge(int *list, int low, int mid, int high) {
 
 void *algo(void *data) {
 	List* list = data;
-	my_mergesort(list->array, 0, list->size - 1);
+	merge_sort(list->array, 0, list->size - 1);
 	
 	return list;
 }
 
-int check(void *result) {
+int check(void *result, int index) {
 	List *list = result;
 	return is_sorted(list->array, list->size);
+}
+
+void load_title(int index, char title[50]) {
+	sprintf(title, "Size = %d", (int) pow(BASE, index));
+}
+
+void *load_test_case(int index) {	
+	List *test_case;
+	int size = pow(BASE, index);
+
+	test_case = (List*) malloc(sizeof(List));
+	test_case->array = (int*) malloc(sizeof(int) * size);
+	test_case->size = size;
+	randomize_array(test_case->array, size);
+
+	return test_case;
+}
+
+void *free_all(void *test_case, void *result) {
+	List *list = test_case;
+
+	free(list->array);
+	free(list);
 }
