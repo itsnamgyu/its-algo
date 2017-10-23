@@ -4,7 +4,9 @@ int rec(int *list, int n, int low, int high) {
 	}
 
 	int mid = (low + high) / 2;
-	if (n < mid) {
+	if (n == list[mid]) {
+		return mid;
+	} else if (n < list[mid]) {
 		return rec(list, n, low, mid - 1);
 	} else {
 		return rec(list, n, mid + 1, high);

@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MIN_REPEAT_COUNT 20
-#define MAX_REPEAT_TIME 500
+#define MIN_REPEAT_COUNT 10
+#define MAX_REPEAT_TIME 250
 	
 void submit(int (*f) (void), char *questionString) {
 	clock_t start = clock();
@@ -63,7 +63,7 @@ void submit_cases_repeatedly(
 		clock_t elapsed_time = 0;
 		clock_t first_clock = clock();
 		int repeat;
-		int success;
+		int success = 1;
 
 		for (repeat = 0; (float) (clock() - first_clock) / CLOCKS_PER_SEC * 1000 < MAX_REPEAT_TIME || repeat < MIN_REPEAT_COUNT; ++ repeat) {
 			void *test_case = load_test_case(i);
@@ -72,7 +72,7 @@ void submit_cases_repeatedly(
 			void *result = algo(test_case);
 			elapsed_time += clock() - old_clock;
 
-			success = assess(result, i);
+			success &= assess(result, i);
 			total_success &= success;
 			
 			free_all(test_case, result);

@@ -7,7 +7,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-#define COUNT 21
+#define COUNT 25
 #define BASE 2
 
 void *solve(void *test_case);
@@ -47,7 +47,12 @@ int check(void *result, int index) {
 	Data *data = result;
 	
 	if (data->position == -1) {
-		return bsearch(&data->n, data->array, data->size, sizeof(int), compare_int) == NULL;
+		void *result = bsearch(&data->n, data->array, data->size, sizeof(int), compare_int);
+		if (result) {
+			printf("%d = data->array[%d]\n", data->n, (int*)result - (int*)data->array);
+			printf("False -1\n");
+		}
+		return !result;
 	}
 	return data->array[data->position] == data->n;
 }
@@ -78,8 +83,7 @@ void *load_test_case(int index) {
 	data->size = size;
 	data->n = data->array[rand() % size];
 
-	randomize_array(data->array, size);
-	qsort(data->array, size, sizeof(int), compare_int);
+	fill_array_sorted(data->array, size);
 
 	return data;
 }
