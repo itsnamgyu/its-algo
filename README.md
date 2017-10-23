@@ -1,5 +1,5 @@
-# its-acm
-(Originally) Practice for my first attempt at the ACM-ICPC competition!
+# its-algo
+(Originally its-acm) Practice for my first attempt at the ACM-ICPC competition!
 
 (As of the day after the competition) This is how I study algorithms!
 
