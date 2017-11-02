@@ -15,7 +15,7 @@ Much of the early work done on this repo will be based on Sogang University cour
 
 ### Dynamic Programming
 - [ ] Skim chapter 3 of 'Fundamentals of Algorithms'
-- [x] Code a Fibbonacci calculator (w/o reference)
+- [x] Code a Fibonacci calculator (w/o reference)
 - [x] Code the Floyd–Warshall Algorithm
 - [x] Code the Bellman-Ford Algorithm
 - [ ] Read chapter 3 and internalize the DP methodology!
