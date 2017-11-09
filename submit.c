@@ -6,6 +6,7 @@
 #define MIN_REPEAT_COUNT 10
 #define MAX_REPEAT_TIME 250
 	
+// depreciated
 void submit(int (*f) (void), char *questionString) {
 	clock_t start = clock();
 	int success = f();
