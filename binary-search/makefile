@@ -1,4 +1,4 @@
-ALGO = algo_recursive_ho.c
+ALGO = algo_recursive_min.c
 
 test : source.o submit.o lib.o algo.o
 	gcc -O2 -g -o test source.o submit.o lib.o algo.o
