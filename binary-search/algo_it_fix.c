@@ -25,7 +25,7 @@ int binary_search(int *list, int n, int size) {
 	 * Since [low] <= n <= [high] for all possible n ( lists,
 	 * all n ( list will be found. Else, NOT_FOUND will be returned
 	 * 
-	 * # Terminating condition
+	 * # (Wrong) Terminating condition
 	 * low == high
 	 *
 	 * # Loop Considerations
@@ -42,18 +42,24 @@ int binary_search(int *list, int n, int size) {
 	 *   if L == H+1
 	 *     if n == H, then L=H
 	 *     else, H=L
+	 * But... why make edge-cases in the first place?
+	 *
+	 * # (Correct) Terminating condition
+	 * low = high + 1
+	 * Then, return value according to L/H
+	 *
+	 * # Loop Considerations
+	 * Same (will always meet the alternative T.C.
 	 *
 	 * # Return Value
 	 * if [low] == n: return low=high
 	 * else:          NOT_FOUND
 	 */
-	while (low < high) {
+	while (low + 1 < high) {
 		int mid = (low + high) / 2;
 
-		if (low == mid) {
-			
-		}
-		if (list[mid] <= n) 
+		// < and <= are equivalent
+		if (list[mid] < n) 
 			low = mid;
 		else 
 			high = mid;
@@ -61,6 +67,8 @@ int binary_search(int *list, int n, int size) {
 
 	if (list[low] == n)
 		return low;
-	else 
+	else if (list[high] == n) 
+		return high;
+	else
 		return -1;
 }
